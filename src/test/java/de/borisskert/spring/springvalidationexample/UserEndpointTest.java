@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class ExampleEndpointTest {
+class UserEndpointTest {
     public static final Pattern UUID_REGEX = Pattern.compile("^([a-f0-9]{8}(-[a-f0-9]{4}){4}[a-f0-9]{8})$");
 
     @Autowired

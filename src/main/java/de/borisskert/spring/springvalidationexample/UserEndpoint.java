@@ -9,7 +9,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/users")
-public class ExampleEndpoint {
+public class UserEndpoint {
 
     @PostMapping
     public CreatedUser postUser(
