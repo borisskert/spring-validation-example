@@ -9,6 +9,7 @@ import java.util.UUID;
 public class CreateUserRequest {
     @NotNull
     @NotEmpty
+    @Username
     private final String name;
 
     @NotNull

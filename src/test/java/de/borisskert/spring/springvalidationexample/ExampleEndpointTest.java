@@ -30,14 +30,14 @@ class ExampleEndpointTest {
     @Test
     public void shouldCreateUser() throws Exception {
         JSONObject requestBody = new JSONObject()
-                .put("name", "my name")
+                .put("name", "username")
                 .put("email", "my@email.com");
 
         mvc.perform(post("/users")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestBody.toString()))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("name", equalTo("my name")))
+                .andExpect(jsonPath("name", equalTo("username")))
                 .andExpect(jsonPath("email", equalTo("my@email.com")))
                 .andExpect(jsonPath("id", matchesRegex(UUID_REGEX)))
         ;
@@ -96,6 +96,20 @@ class ExampleEndpointTest {
     @Test
     public void shouldNotAcceptMissingName() throws Exception {
         JSONObject requestBody = new JSONObject()
+                .put("email", "my@email.com");
+
+        mvc.perform(post("/users")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestBody.toString()))
+                .andExpect(status().is4xxClientError())
+                .andExpect(content().string(not(emptyOrNullString())))
+        ;
+    }
+
+    @Test
+    public void shouldNotAcceptInvalidName() throws Exception {
+        JSONObject requestBody = new JSONObject()
+                .put("name", "user5name")
                 .put("email", "my@email.com");
 
         mvc.perform(post("/users")
