@@ -5,12 +5,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/users")
 public class ExampleEndpoint {
 
     @PostMapping
-    public CreatedUser postUser(@RequestBody CreateUserRequest createUserRequest) {
+    public CreatedUser postUser(
+            @RequestBody @Valid CreateUserRequest createUserRequest
+    ) {
         return createUserRequest.create();
     }
 }

@@ -10,9 +10,12 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.regex.Pattern;
 
+import static org.hamcrest.Matchers.emptyOrNullString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.matchesRegex;
+import static org.hamcrest.Matchers.not;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -37,6 +40,69 @@ class ExampleEndpointTest {
                 .andExpect(jsonPath("name", equalTo("my name")))
                 .andExpect(jsonPath("email", equalTo("my@email.com")))
                 .andExpect(jsonPath("id", matchesRegex(UUID_REGEX)))
+        ;
+    }
+
+    @Test
+    public void shouldNotAcceptEmptyBody() throws Exception {
+        mvc.perform(post("/users")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is4xxClientError())
+                .andExpect(content().string(emptyOrNullString()))
+        ;
+    }
+
+    @Test
+    public void shouldNotAcceptMissingEmail() throws Exception {
+        JSONObject requestBody = new JSONObject()
+                .put("name", "my name");
+
+        mvc.perform(post("/users")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestBody.toString()))
+                .andExpect(status().is4xxClientError())
+                .andExpect(content().string(not(emptyOrNullString())))
+        ;
+    }
+
+    @Test
+    public void shouldNotAcceptEmptyEmail() throws Exception {
+        JSONObject requestBody = new JSONObject()
+                .put("name", "my name")
+                .put("email", "");
+
+        mvc.perform(post("/users")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestBody.toString()))
+                .andExpect(status().is4xxClientError())
+                .andExpect(content().string(not(emptyOrNullString())))
+        ;
+    }
+
+    @Test
+    public void shouldNotAcceptEmptyName() throws Exception {
+        JSONObject requestBody = new JSONObject()
+                .put("name", "")
+                .put("email", "my@email.com");
+
+        mvc.perform(post("/users")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestBody.toString()))
+                .andExpect(status().is4xxClientError())
+                .andExpect(content().string(not(emptyOrNullString())))
+        ;
+    }
+
+    @Test
+    public void shouldNotAcceptMissingName() throws Exception {
+        JSONObject requestBody = new JSONObject()
+                .put("email", "my@email.com");
+
+        mvc.perform(post("/users")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestBody.toString()))
+                .andExpect(status().is4xxClientError())
+                .andExpect(content().string(not(emptyOrNullString())))
         ;
     }
 }
