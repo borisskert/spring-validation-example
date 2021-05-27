@@ -1,6 +1,8 @@
 package de.borisskert.spring.springvalidationexample;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import de.borisskert.spring.springvalidationexample.validator.UnoccupiedUsername;
+import de.borisskert.spring.springvalidationexample.validator.Username;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -10,6 +12,7 @@ public class CreateUserRequest {
     @NotNull
     @NotEmpty
     @Username
+    @UnoccupiedUsername
     private final String name;
 
     @NotNull

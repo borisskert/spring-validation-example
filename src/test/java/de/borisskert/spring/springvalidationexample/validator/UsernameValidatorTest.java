@@ -1,4 +1,4 @@
-package de.borisskert.spring.springvalidationexample;
+package de.borisskert.spring.springvalidationexample.validator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

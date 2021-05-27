@@ -121,4 +121,23 @@ class UserEndpointTest {
                 .andExpect(content().string(not(emptyOrNullString())))
         ;
     }
+
+    @Test
+    public void shouldNotAcceptOccupiedUsername() throws Exception {
+        JSONObject requestBody = new JSONObject()
+                .put("name", "occupied")
+                .put("email", "occupied@email.com");
+
+        mvc.perform(post("/users")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestBody.toString()))
+                .andExpect(status().isOk())
+        ;
+
+        mvc.perform(post("/users")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestBody.toString()))
+                .andExpect(status().is4xxClientError())
+        ;
+    }
 }

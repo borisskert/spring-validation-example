@@ -1,4 +1,4 @@
-package de.borisskert.spring.springvalidationexample;
+package de.borisskert.spring.springvalidationexample.validator;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -9,11 +9,11 @@ public class UsernameValidator implements ConstraintValidator<Username, String> 
 
 
     @Override
-    public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
-        if (s == null || s.isEmpty()) {
+    public boolean isValid(String username, ConstraintValidatorContext constraintValidatorContext) {
+        if (username == null || username.isEmpty()) {
             return true;
         }
 
-        return USERNAME_PATTERN.matcher(s).matches();
+        return USERNAME_PATTERN.matcher(username).matches();
     }
 }
