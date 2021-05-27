@@ -11,12 +11,9 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.regex.Pattern;
 
-import static org.hamcrest.Matchers.emptyOrNullString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.matchesRegex;
-import static org.hamcrest.Matchers.not;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -50,7 +47,6 @@ class UserEndpointTest {
         mvc.perform(post("/users")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
-                .andExpect(content().string(emptyOrNullString()))
         ;
     }
 
@@ -63,7 +59,6 @@ class UserEndpointTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestBody.toString()))
                 .andExpect(status().is4xxClientError())
-                .andExpect(content().string(not(emptyOrNullString())))
         ;
     }
 
@@ -77,7 +72,6 @@ class UserEndpointTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestBody.toString()))
                 .andExpect(status().is4xxClientError())
-                .andExpect(content().string(not(emptyOrNullString())))
         ;
     }
 
@@ -91,7 +85,6 @@ class UserEndpointTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestBody.toString()))
                 .andExpect(status().is4xxClientError())
-                .andExpect(content().string(not(emptyOrNullString())))
         ;
     }
 
@@ -104,7 +97,6 @@ class UserEndpointTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestBody.toString()))
                 .andExpect(status().is4xxClientError())
-                .andExpect(content().string(not(emptyOrNullString())))
         ;
     }
 
@@ -118,7 +110,6 @@ class UserEndpointTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestBody.toString()))
                 .andExpect(status().is4xxClientError())
-                .andExpect(content().string(not(emptyOrNullString())))
         ;
     }
 
