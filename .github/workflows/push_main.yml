@@ -1,0 +1,30 @@
+---
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: zulu
+          java-version: 17
+
+      - name: Build package
+        run: mvn -B -DskipTests package
+
+      - name: Deploy image
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "spring-validation-example"
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          usedocker: true
