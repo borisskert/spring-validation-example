@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.util.regex.Pattern;
 
@@ -21,7 +20,6 @@ import static org.hamcrest.Matchers.not;
         classes = Application.class
 )
 @DirtiesContext
-@ActiveProfiles("IT")
 class UserEndpointIT {
     public static final Pattern UUID_REGEX = Pattern.compile("^([a-f0-9]{8}(-[a-f0-9]{4}){4}[a-f0-9]{8})$");
 
