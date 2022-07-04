@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UnoccupiedUsername {
 
-    String message() default "{de.borisskert.spring.springvalidationexample.validator.UnoccupiedUsername.message}";
+    String message() default "Your selected username is occupied already.";
 
     Class<?>[] groups() default {};
 

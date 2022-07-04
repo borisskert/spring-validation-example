@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.borisskert.spring.springvalidationexample.validator.UnoccupiedUsername;
 import de.borisskert.spring.springvalidationexample.validator.Username;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
@@ -17,6 +18,7 @@ public class CreateUserRequest {
 
     @NotNull
     @NotEmpty
+    @Email
     private final String email;
 
     public CreateUserRequest(String name, String email) {

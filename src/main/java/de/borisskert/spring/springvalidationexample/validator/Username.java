@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Username {
 
-    String message() default "{de.borisskert.spring.springvalidationexample.validator.Username.message}";
+    String message() default "Only 8-12 lower-case characters allowed";
 
     Class<?>[] groups() default {};
 
